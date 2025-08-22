@@ -1,0 +1,87 @@
+Usama Haider – Cybersecurity Researcher & Software Developer
+🔹 About Me
+
+I am a Cybersecurity Researcher, Ethical Hacker, and Software Developer with hands-on experience in penetration testing, ethical hacking, OSINT investigations, and secure software development. With a strong background in programming, digital forensics, and system security, I specialize in identifying vulnerabilities, securing infrastructures, and building tools that enhance cyber defense.
+
+Currently, I work at Doart Energy, where I received the Programming Excellence Award for my contributions in automation, tool development, and system optimization. My passion lies in exploring security gaps, building ethical hacking toolkits, and providing organizations with deep technical insights to improve their security posture.
+
+📌 Connect with me on LinkedIn
+
+🔹 Skills & Expertise
+🛡 Cybersecurity & Ethical Hacking
+
+Web Application Penetration Testing (OWASP Top 10)
+
+Network Security Testing (Internal & External)
+
+Bug Bounty Hunting (Web, API, and Mobile apps)
+
+Exploit Research (SSRF, RCE, SQLi, XSS, LFI/RFI, Authentication bypass)
+
+Social Engineering & Phishing Simulations
+
+OSINT (Open-Source Intelligence) Investigations
+
+⚙ Custom Security Tool Development
+
+Ethical hacking USB toolkit (keylogger, screenshot logger, NirSoft tools, PowerShell automation)
+
+Python-based Recon & Enumeration Scripts
+
+Custom Network Scanners & Automation Scripts
+
+Tasker-based Mobile Security Automation (remote wipe, SIM change detection, anti-theft)
+
+🌐 Web & API Testing
+
+WordPress & CMS Security Testing
+
+API Pentesting (Authentication, Rate-limiting, Broken Object Level Auth)
+
+HTTP Header & Cookie Manipulation with Burp Suite
+
+Firewall/IPS bypass testing
+
+📊 Programming & Development
+
+Python (Cybersecurity tools, automation scripts)
+
+PowerShell & Bash scripting
+
+Web scraping & OSINT automation
+
+Windows & Linux tool development
+
+🔹 Services I Provide
+
+✅ Web & Mobile Application Penetration Testing
+✅ Bug Bounty Hunting Support (Vulnerability Research & Reporting)
+✅ Custom Ethical Hacking Toolkit Development
+✅ OSINT Investigations & Digital Forensics
+✅ Network Security Audits (Internal/External)
+✅ Automation Scripts (Python, PowerShell, Bash)
+✅ Secure Software Development Consulting
+
+🔹 Achievements
+
+🏆 Programming Excellence Award at Doart Energy
+
+🎯 Successfully conducted penetration tests on multiple domains (WordPress, APIs, cPanel, e-commerce platforms).
+
+🔍 Active participant in Bug Bounty Programs (HackerOne, inDrive, OPPO Security Event).
+
+📂 Built a custom USB-based Ethical Hacking Toolkit for research and internal testing.
+
+🔹 Tools & Platforms
+
+Pentesting: Burp Suite, Nmap, Bettercap, Hydra, SQLmap, Wireshark
+
+OSINT & Forensics: Maltego, crt.sh, Recon-ng, custom Python scrapers
+
+Scripting & Automation: Python, PowerShell, Bash
+
+Development Environments: Kali Linux, Windows, Docker
+
+🔹 Future Goals
+
+My mission is to continuously sharpen my skills in ethical hacking, exploit development, and advanced threat research, while contributing to organizations through bug bounty programs, internal security audits, and secure coding practices.
