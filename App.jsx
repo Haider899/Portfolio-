@@ -38,7 +38,11 @@ function App() {
       'Python Recon Scripts',
       'Network Scanners',
       'Mobile Security Automation',
-      'PowerShell Automation'
+      'PowerShell Automation' ,
+      'Pen testing' ,
+      'SIEM' ,
+      'Wireshark' ,
+      'Digital Forensics'
     ],
     testing: [
       'WordPress Security Testing',
