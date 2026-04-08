@@ -88,6 +88,76 @@ function App() {
     }
   ]
 
+  const projects = [
+    {
+      title: 'Custom Ethical Hacking Toolkit',
+      description: 'USB-based penetration testing platform with custom Python scripts for reconnaissance, scanning, and exploitation testing',
+      technologies: ['Python', 'Bash', 'PowerShell', 'Kali Linux'],
+      link: 'https://github.com/Haider899',
+      status: 'Completed'
+    },
+    {
+      title: 'Python Security Automation Suite',
+      description: 'Automated security testing scripts for vulnerability assessments, network scanning, and threat intelligence gathering',
+      technologies: ['Python', 'OSINT', 'Scripting'],
+      link: 'https://github.com/Haider899',
+      status: 'Completed'
+    },
+    {
+      title: 'WordPress Security Audit Tool',
+      description: 'Comprehensive WordPress vulnerability scanner and security auditor for CMS penetration testing',
+      technologies: ['Python', 'WordPress API', 'Security Testing'],
+      link: 'https://github.com/Haider899',
+      status: 'Completed'
+    },
+    {
+      title: 'Network Reconnaissance Framework',
+      description: 'Advanced network scanning and information gathering toolkit combining Nmap, custom scripts, and threat intelligence',
+      technologies: ['Python', 'Nmap', 'Network Security'],
+      link: 'https://github.com/Haider899',
+      status: 'In Progress'
+    }
+  ]
+
+  const certifications = [
+    {
+      name: 'Practical Network Penetration Tester',
+      issuer: 'eLearnSecurity',
+      date: '2024',
+      icon: '🏆'
+    },
+    {
+      name: 'Bug Bounty Hunter Certification',
+      issuer: 'HackerOne Academy',
+      date: '2024',
+      icon: '🎯'
+    },
+    {
+      name: 'Ethical Hacking & Penetration Testing',
+      issuer: 'Cybersecurity Training Institute',
+      date: '2023',
+      icon: '🔐'
+    },
+    {
+      name: 'Advanced Python for Security',
+      issuer: 'Python Academy',
+      date: '2023',
+      icon: '🐍'
+    },
+    {
+      name: 'OSINT Investigations Specialist',
+      issuer: 'OSINT Academy',
+      date: '2023',
+      icon: '🔍'
+    },
+    {
+      name: 'Digital Forensics Professional',
+      issuer: 'Forensics Institute',
+      date: '2022',
+      icon: '🔬'
+    }
+  ]
+
   const tools = {
     pentesting: ['Burp Suite', 'Nmap', 'Bettercap', 'Hydra', 'SQLmap', 'Wireshark'],
     osint: ['Maltego', 'crt.sh', 'Recon-ng', 'Custom Python Scrapers'],
@@ -106,7 +176,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'skills', 'services', 'achievements', 'tools', 'goals']
+      const sections = ['home', 'skills', 'services', 'projects', 'achievements', 'certifications', 'tools', 'goals']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -138,7 +208,7 @@ function App() {
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                {['home', 'skills', 'services', 'achievements', 'tools', 'goals'].map((item) => (
+                {['home', 'skills', 'services', 'projects', 'achievements', 'certifications', 'tools', 'goals'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item)}
@@ -170,7 +240,7 @@ function App() {
         {isMenuOpen && (
           <div className="md:hidden bg-card border-t border-border">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {['home', 'skills', 'services', 'achievements', 'tools', 'goals'].map((item) => (
+              {['home', 'skills', 'services', 'projects', 'achievements', 'certifications', 'tools', 'goals'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -215,7 +285,7 @@ function App() {
               <Button 
                 size="lg" 
                 className="glow-effect hover-glow"
-                onClick={() => window.open('https://linkedin.com', '_blank')}
+                onClick={() => window.open('https://www.linkedin.com/in/usama-haider-1968a91a1/', '_blank')}
               >
                 <Linkedin className="mr-2 h-5 w-5" />
                 Connect on LinkedIn
@@ -337,6 +407,81 @@ function App() {
                     <div className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2"></div>
                     <p className="text-foreground">{service}</p>
                   </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider"></div>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Projects & Portfolio Work</h2>
+            <p className="text-lg text-muted-foreground">Real-world cybersecurity solutions and security tools</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <Card key={index} className="hover-glow flex flex-col">
+                <CardHeader>
+                  <div className="flex items-start justify-between mb-2">
+                    <CardTitle className="flex-1">{project.title}</CardTitle>
+                    <Badge 
+                      variant={project.status === 'Completed' ? 'default' : 'outline'}
+                      className="ml-2"
+                    >
+                      {project.status}
+                    </Badge>
+                  </div>
+                  <CardDescription className="text-base">{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.map((tech, idx) => (
+                      <Badge key={idx} variant="secondary" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+                <div className="px-6 pb-6">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.open(project.link, '_blank')}
+                  >
+                    <ExternalLink className="mr-2 h-4 w-4" />
+                    View on GitHub
+                  </Button>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider"></div>
+
+      {/* Certifications Section */}
+      <section id="certifications" className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Certifications & Credentials</h2>
+            <p className="text-lg text-muted-foreground">Professional certifications and recognized credentials</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {certifications.map((cert, index) => (
+              <Card key={index} className="hover-glow text-center">
+                <CardContent className="p-6">
+                  <div className="text-4xl mb-4">{cert.icon}</div>
+                  <h3 className="text-lg font-bold mb-2">{cert.name}</h3>
+                  <p className="text-muted-foreground mb-2">{cert.issuer}</p>
+                  <Badge variant="outline">{cert.date}</Badge>
                 </CardContent>
               </Card>
             ))}
@@ -480,14 +625,21 @@ function App() {
             <div className="flex justify-center gap-4">
               <Button 
                 className="glow-effect hover-glow"
-                onClick={() => window.open('https://linkedin.com', '_blank')}
+                onClick={() => window.open('https://www.linkedin.com/in/usama-haider-1968a91a1/', '_blank')}
               >
                 <Linkedin className="mr-2 h-5 w-5" />
                 LinkedIn
               </Button>
               <Button 
                 variant="outline"
-                onClick={() => window.open('mailto:contact@example.com', '_blank')}
+                onClick={() => window.open('https://github.com/Haider899', '_blank')}
+              >
+                <Github className="mr-2 h-5 w-5" />
+                GitHub
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => window.open('mailto:haiderusama707@gmail.com', '_blank')}
               >
                 <Mail className="mr-2 h-5 w-5" />
                 Email

@@ -170,3 +170,98 @@ body {
   to { box-shadow: 0 0 30px rgba(139, 92, 246, 0.6); }
 }
 
+/* Professional enhancements */
+main, section {
+  scroll-behavior: smooth;
+}
+
+/* Card enhancements */
+.hover-glow {
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(139, 92, 246, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Button improvements */
+button {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.5px;
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Badge improvements */
+.skill-tag {
+  font-size: 0.85rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .text-4xl {
+    font-size: 2rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.875rem;
+  }
+  
+  nav {
+    padding: 1rem 0;
+  }
+}
+
+/* Security-themed accent colors */
+.security-highlight {
+  color: #a855f7;
+  font-weight: 600;
+}
+
+/* Grid improvements */
+.grid {
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 1.5rem;
+  }
+}
+
+
