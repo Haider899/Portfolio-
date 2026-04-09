@@ -52,6 +52,13 @@ const Badge = ({ children, variant = 'secondary', className = '' }) => {
   )
 }
 
+const WhatsAppIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.52 0 .2 5.32.2 11.86c0 2.1.55 4.15 1.6 5.95L0 24l6.38-1.67a11.78 11.78 0 0 0 5.68 1.45h.01c6.54 0 11.86-5.32 11.86-11.86 0-3.17-1.23-6.14-3.41-8.44ZM12.07 21.77h-.01a9.9 9.9 0 0 1-5.03-1.37l-.36-.21-3.79.99 1.01-3.69-.23-.38a9.88 9.88 0 0 1-1.51-5.25c0-5.46 4.45-9.91 9.92-9.91 2.64 0 5.13 1.03 6.99 2.9a9.84 9.84 0 0 1 2.91 7c0 5.47-4.45 9.92-9.9 9.92Z" fill="currentColor"/>
+    <path d="M17.5 14.34c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.69.15-.2.3-.79.98-.97 1.18-.18.2-.36.23-.66.08-.3-.15-1.28-.47-2.43-1.5-.9-.8-1.5-1.8-1.68-2.1-.18-.3-.02-.46.13-.61.13-.13.3-.36.44-.54.15-.18.2-.31.3-.51.1-.2.05-.38-.03-.54-.08-.15-.69-1.66-.94-2.28-.25-.6-.51-.52-.69-.53h-.58c-.2 0-.51.08-.77.38s-1 1-.1 2.45c.9 1.46 1.29 2.86 2.77 4.11 1.48 1.24 2.06 1.57 3.52 2.14 1.46.56 1.76.47 2.08.44.31-.03 1-.41 1.14-.8.14-.38.14-.71.1-.79-.05-.08-.25-.13-.54-.28Z" fill="currentColor"/>
+  </svg>
+)
+
 const Card = ({ children, className = '' }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -95,22 +102,18 @@ const AdvancedCard = ({ children, className = '' }) => {
 const ProjectCard = ({ project }) => (
   <AdvancedCard>
     <div className="relative overflow-hidden rounded-[1.75rem]">
-      {/* 1. The "Glass Box" (Gradient) - We keep this at z-0 so it stays in the back */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-cyan-500/30 via-sky-500/10 to-transparent opacity-80 pointer-events-none z-0" />
-      
-      {/* 2. The Content Wrapper - We set this to z-10 to pull it forward */}
-      <div className="relative z-10 flex h-full flex-col gap-5 p-6">
+      <div className="flex h-full flex-col gap-5 p-6">
         <div className="flex flex-col gap-4">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              {/* 3. The "Project" Word - We set this to z-20 to be 100% sure it's on top */}
-              <p className="relative z-20 text-xs uppercase tracking-[0.28em] text-white/90 font-semibold">Project</p>
-              {/* Added break-words and leading-tight to handle long names */}
-             <h3 className="mt-3 text-xl md:text-2xl font-bold text-white tracking-tight break-words whitespace-normal leading-tight">
+          <div className="rounded-[1.5rem] bg-gradient-to-r from-cyan-500/20 via-sky-500/8 to-transparent px-5 py-5">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/90">Project</p>
+                <h3 className="mt-3 max-w-full text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl [overflow-wrap:anywhere]">
                {project.title}
-               </h3>
+                </h3>
+              </div>
+              <Badge variant="default" className="shrink-0 text-[11px]">{project.status}</Badge>
             </div>
-            <Badge variant="default" className="text-[11px]">{project.status}</Badge>
           </div>
           <p className="text-slate-300 leading-relaxed">{project.description}</p>
         </div>
@@ -132,10 +135,41 @@ const ProjectCard = ({ project }) => (
   </AdvancedCard>
 )
 
+const UnifiedCard = ({ eyebrow, title, badge, icon, children, footer, center = false }) => (
+  <AdvancedCard className="h-full">
+    <div className={`flex h-full flex-col gap-5 ${center ? 'text-center' : ''}`}>
+      <div className="rounded-[1.5rem] bg-gradient-to-r from-cyan-500/20 via-sky-500/8 to-transparent px-5 py-5">
+        <div className={`flex gap-3 ${center ? 'flex-col items-center text-center' : 'items-start justify-between'}`}>
+          <div className={`${center ? 'w-full' : 'min-w-0 flex-1'}`}>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/90">{eyebrow}</p>
+            <div className={`mt-3 flex gap-3 ${center ? 'flex-col items-center' : 'items-start'}`}>
+              {icon ? (
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-white/5 text-slate-200">
+                  {icon}
+                </span>
+              ) : null}
+              <h3 className="min-w-0 max-w-full text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl [overflow-wrap:anywhere]">
+                {title}
+              </h3>
+            </div>
+          </div>
+          {badge ? <Badge variant="default" className="shrink-0 text-[11px]">{badge}</Badge> : null}
+        </div>
+      </div>
+      <div className={`flex flex-1 flex-col gap-5 ${center ? 'items-center' : ''}`}>
+        {children}
+        {footer ? <div className={`mt-auto ${center ? 'flex justify-center' : ''}`}>{footer}</div> : null}
+      </div>
+    </div>
+  </AdvancedCard>
+)
+
 function App() {
+  const [isBooting, setIsBooting] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [activeConsoleMode, setActiveConsoleMode] = useState('recon')
   const [contactName, setContactName] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [contactMessage, setContactMessage] = useState('')
@@ -310,6 +344,66 @@ function App() {
     environments: ['Kali Linux', 'Windows', 'Docker']
   }
 
+  const capabilityItems = [
+    { title: 'Security Research', icon: Shield, accent: 'Threat Intel' },
+    { title: 'Secure Development', icon: Code, accent: 'AppSec' },
+    { title: 'OSINT Intelligence', icon: Search, accent: 'Discovery' },
+    { title: 'Penetration Testing', icon: Target, accent: 'Offensive' },
+    { title: 'Version Control', icon: GitBranch, accent: 'Workflow' },
+    { title: 'Automation', icon: Wrench, accent: 'Scale' }
+  ]
+
+  const consoleModes = {
+    recon: {
+      title: 'Recon sweep',
+      description: 'Enumerating surface area, indexing public assets, and correlating findings into a clean attack map.',
+      tags: ['Recon', 'Surface Map'],
+      lines: [
+        { label: 'root@haider', text: 'Booting Sentinel-Scan workspace', status: '[OK]' },
+        { label: 'enum', text: 'Resolving subdomains and exposed services', status: '[42 HOSTS]' },
+        { label: 'osint', text: 'Cross-linking GitHub, crt.sh, and passive DNS', status: '[LIVE]' },
+        { label: 'report', text: 'Building prioritized recon bundle for manual review', status: '[READY]' }
+      ],
+      stats: [
+        { label: 'Targets', value: '42' },
+        { label: 'Signals', value: '186' },
+        { label: 'Noise Cut', value: '71%' }
+      ]
+    },
+    exploit: {
+      title: 'Exploit lab',
+      description: 'Validating findings in a controlled workflow with repeatable checks and safer reproduction notes.',
+      tags: ['Exploit', 'Validation'],
+      lines: [
+        { label: 'payload', text: 'Staging proof-of-concept vectors in isolated lab', status: '[SAFE]' },
+        { label: 'proxy', text: 'Replaying requests through instrumented intercept stack', status: '[TRACE]' },
+        { label: 'scanner', text: 'Verifying auth, headers, and input handling regressions', status: '[RUNNING]' },
+        { label: 'result', text: 'Capturing exploit path with remediation markers', status: '[LOGGED]' }
+      ],
+      stats: [
+        { label: 'Vectors', value: '09' },
+        { label: 'Confirmed', value: '03' },
+        { label: 'Risk', value: 'High' }
+      ]
+    },
+    automate: {
+      title: 'Automation pipeline',
+      description: 'Chaining scripts, parsers, and response actions into a faster operator workflow.',
+      tags: ['Automation', 'Response'],
+      lines: [
+        { label: 'queue', text: 'Dispatching Python and PowerShell job set', status: '[SYNCED]' },
+        { label: 'parser', text: 'Normalizing outputs into dashboard-ready JSON', status: '[CLEAN]' },
+        { label: 'watcher', text: 'Triggering alert hooks for critical findings', status: '[ARMED]' },
+        { label: 'export', text: 'Shipping encrypted evidence pack and summary', status: '[DONE]' }
+      ],
+      stats: [
+        { label: 'Tools', value: '70+' },
+        { label: 'Turnaround', value: '24h' },
+        { label: 'Coverage', value: '99%' }
+      ]
+    }
+  }
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -325,6 +419,11 @@ function App() {
     const body = encodeURIComponent(`Name: ${contactName}\nEmail: ${contactEmail}\n\n${contactMessage}`)
     window.location.href = `mailto:haiderusama707@gmail.com?subject=${subject}&body=${body}`
   }
+
+  useEffect(() => {
+    const bootTimer = window.setTimeout(() => setIsBooting(false), 2400)
+    return () => window.clearTimeout(bootTimer)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -354,12 +453,25 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#070c12] text-white relative">
+      <div className={`boot-sequence ${isBooting ? 'boot-sequence--active' : 'boot-sequence--hidden'}`}>
+        <div className="boot-sequence__panel">
+          <p className="boot-sequence__eyebrow">Initializing</p>
+          <div className="boot-sequence__bar">
+            <span className="boot-sequence__bar-fill" />
+          </div>
+          <div className="boot-sequence__lines">
+            <p>Loading operator profile...</p>
+            <p>Mounting secure interface...</p>
+            <p>Synchronizing mission modules...</p>
+          </div>
+        </div>
+      </div>
       <div className="fixed inset-x-0 top-0 z-50 h-1 bg-white/10">
         <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 shadow-[0_0_20px_rgba(56,189,248,0.35)] transition-all duration-150 ease-out" style={{ width: `${scrollProgress}%` }} />
       </div>
       <div className="fixed inset-0 bg-grid-animate pointer-events-none -z-10" />
       <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#071018]/95 backdrop-blur-2xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-3xl border border-white/10 bg-white/5">
               <Shield className="h-5 w-5 text-white" />
@@ -394,7 +506,7 @@ function App() {
 
         {isMenuOpen && (
           <div className="md:hidden border-t border-white/10 bg-[#071018]/95 backdrop-blur-xl">
-            <div className="mx-auto max-w-6xl px-6 py-4 space-y-2">
+            <div className="mx-auto max-w-[1600px] px-6 py-4 space-y-2">
               {navItems.map((item) => (
                 <button
                   key={item}
@@ -422,8 +534,8 @@ function App() {
   
   <div className="absolute right-0 top-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.08),_transparent_65%)] blur-3xl pointer-events-none" />
   
-  <div className="mx-auto max-w-6xl px-6">
-    <div className="flex flex-col gap-12">
+  <div className="mx-auto max-w-[1600px] px-6">
+    <div className="grid gap-12 xl:grid-cols-[1.12fr_0.88fr] xl:items-start">
       <div className="space-y-8">
         {/* This tag should now be fully visible below your navbar */}
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.26em] text-slate-300">
@@ -485,6 +597,31 @@ function App() {
                     <Mail size={22} />
                   </motion.button>
                 </div>
+                <div className="hero-ops-panel">
+                  <div className="hero-ops-panel__header">
+                    <span className="hero-ops-panel__eyebrow">Operator Snapshot</span>
+                    <span className="hero-ops-panel__status">Active</span>
+                  </div>
+                  <div className="hero-ops-panel__grid">
+                    <div className="hero-ops-stat">
+                      <span className="hero-ops-stat__label">Focus</span>
+                      <span className="hero-ops-stat__value">AppSec</span>
+                    </div>
+                    <div className="hero-ops-stat">
+                      <span className="hero-ops-stat__label">Mode</span>
+                      <span className="hero-ops-stat__value">Research</span>
+                    </div>
+                    <div className="hero-ops-stat">
+                      <span className="hero-ops-stat__label">Stack</span>
+                      <span className="hero-ops-stat__value">Python / React</span>
+                    </div>
+                  </div>
+                  <div className="hero-ops-panel__terminal">
+                    <span className="terminal-prompt">live</span>
+                    <span className="terminal-command">$</span>
+                    <span className="text-slate-300">tracking signals, building tools, shipping secure systems</span>
+                  </div>
+                </div>
               </div>
 
               <div className="relative">
@@ -498,63 +635,83 @@ function App() {
                       CEH
                     </div>
                   </div>
-                  <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-                    <div className="hex-cell">
-                      <div className="icon-wrap"><Shield className="h-5 w-5" /></div>
-                      <p className="mt-4 text-sm font-semibold text-white text-center">Security Research</p>
-                    </div>
-                    <div className="hex-cell">
-                      <div className="icon-wrap"><Code className="h-5 w-5" /></div>
-                      <p className="mt-4 text-sm font-semibold text-white text-center">Secure Development</p>
-                    </div>
-                    <div className="hex-cell">
-                      <div className="icon-wrap"><Search className="h-5 w-5" /></div>
-                      <p className="mt-4 text-sm font-semibold text-white text-center">OSINT Intelligence</p>
-                    </div>
-                    <div className="hex-cell">
-                      <div className="icon-wrap"><Target className="h-5 w-5" /></div>
-                      <p className="mt-4 text-sm font-semibold text-white text-center">Penetration Testing</p>
-                    </div>
-                    <div className="hex-cell">
-                      <div className="icon-wrap"><GitBranch className="h-5 w-5" /></div>
-                      <p className="mt-4 text-sm font-semibold text-white text-center">Version Control</p>
-                    </div>
-                    <div className="hex-cell">
-                      <div className="icon-wrap"><Wrench className="h-5 w-5" /></div>
-                      <p className="mt-4 text-sm font-semibold text-white text-center">Automation</p>
-                    </div>
+                  <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                    {capabilityItems.map((item) => {
+                      const Icon = item.icon
+                      return (
+                        <div key={item.title} className="capability-node">
+                          <div className="capability-node__icon">
+                            <Icon className="h-4 w-4" />
+                          </div>
+                          <div className="mt-3 space-y-1">
+                            <p className="text-sm font-semibold leading-tight text-white">{item.title}</p>
+                            <p className="text-[10px] uppercase tracking-[0.28em] text-slate-500">{item.accent}</p>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
 
-                  <div className="mt-8 rounded-3xl border border-white/10 bg-[#06111f]/85 p-6 text-slate-300 shadow-[0_20px_70px_rgba(0,0,0,0.18)]">
+                  <div className="terminal-shell mt-8 rounded-[2rem] border border-white/10 bg-[#06111f]/85 p-6 text-slate-300 shadow-[0_20px_70px_rgba(0,0,0,0.18)]">
                     <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
                       <div>
                         <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500">Mission Control</p>
-                        <h3 className="mt-2 text-xl font-semibold text-white">Live attack simulation</h3>
+                        <h3 className="mt-2 text-xl font-semibold text-white">{consoleModes[activeConsoleMode].title}</h3>
+                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">{consoleModes[activeConsoleMode].description}</p>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-300">Recon</span>
-                        <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-slate-300">Automation</span>
+                        {Object.entries(consoleModes).map(([mode, config]) => (
+                          <button
+                            key={mode}
+                            type="button"
+                            onClick={() => setActiveConsoleMode(mode)}
+                            className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.28em] transition ${
+                              activeConsoleMode === mode
+                                ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-200'
+                                : 'border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10'
+                            }`}
+                          >
+                            {config.tags[0]}
+                          </button>
+                        ))}
                       </div>
+                    </div>
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {consoleModes[activeConsoleMode].tags.map((tag) => (
+                        <span key={tag} className="rounded-full border border-cyan-400/15 bg-cyan-400/8 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-cyan-100">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                     <div className="terminal-panel space-y-3 text-[13px] leading-6">
-                      <div className="terminal-line"><span className="terminal-prompt">root@haider</span><span>Initializing multi-vector scan... <span className="text-slate-400">[OK]</span></span></div>
-                      <div className="terminal-line"><span className="terminal-prompt">system</span><span>Loading threat modules & Kali payloads... <span className="text-slate-400">[READY]</span></span></div>
-                      <div className="terminal-line"><span className="terminal-prompt">scanner</span><span>Running Sentinel-Scan against target assets...</span></div>
-                      <div className="terminal-line"><span className="terminal-prompt">report</span><span>Output encrypted logs & risk summary to dashboard</span></div>
+                      <div className="terminal-toolbar">
+                        <span className="terminal-dot terminal-dot--red" />
+                        <span className="terminal-dot terminal-dot--amber" />
+                        <span className="terminal-dot terminal-dot--green" />
+                        <span className="terminal-toolbar__title">operator@portfolio:~/{activeConsoleMode}</span>
+                      </div>
+                      {consoleModes[activeConsoleMode].lines.map((line) => (
+                        <div key={`${activeConsoleMode}-${line.label}-${line.text}`} className="terminal-line">
+                          <span className="terminal-prompt">{line.label}</span>
+                          <span className="terminal-command">$</span>
+                          <span className="flex-1">{line.text}</span>
+                          <span className="text-slate-500">{line.status}</span>
+                        </div>
+                      ))}
+                      <div className="terminal-line terminal-line--cursor">
+                        <span className="terminal-prompt">shell</span>
+                        <span className="terminal-command">$</span>
+                        <span className="text-slate-400">awaiting operator input</span>
+                        <span className="terminal-cursor" />
+                      </div>
                     </div>
                     <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                      <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-center">
-                        <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Detection</p>
-                        <p className="mt-2 text-2xl font-semibold text-white">99%</p>
-                      </div>
-                      <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-center">
-                        <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Tools</p>
-                        <p className="mt-2 text-2xl font-semibold text-white">70+</p>
-                      </div>
-                      <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-center">
-                        <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Response</p>
-                        <p className="mt-2 text-2xl font-semibold text-white">24h</p>
-                      </div>
+                      {consoleModes[activeConsoleMode].stats.map((stat) => (
+                        <div key={`${activeConsoleMode}-${stat.label}`} className="rounded-3xl border border-white/10 bg-white/5 p-4 text-center">
+                          <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{stat.label}</p>
+                          <p className="mt-2 text-2xl font-semibold text-white">{stat.value}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -570,7 +727,7 @@ function App() {
   transition={{ duration: 0.8, ease: 'easeOut' }}
   className="py-20"
 >
-  <div className="mx-auto max-w-[1400px] px-6 w-full">
+  <div className="mx-auto max-w-[1600px] px-6 w-full">
     {/* Main "Sentinel" Glass Panel */}
     <div className="bg-[#060b13]/80 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
       
@@ -621,7 +778,7 @@ function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="py-20 px-4 sm:px-6 lg:px-8"
         >
-        <div className="mx-auto max-w-[1400px] px-6 w-full">
+        <div className="mx-auto max-w-[1600px] px-6 w-full">
 <div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Service_Pipeline</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Professional Services</h2>
@@ -629,14 +786,19 @@ function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index}>
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 bg-slate-500 rounded-sm mt-2 flex-none"></div>
-                  <p className="text-slate-300 leading-relaxed font-light">{service}</p>
-                </div>
-              </Card>
-            ))}
+            {services.map((service, index) => (
+              <UnifiedCard
+                key={index}
+                eyebrow="Service"
+                title={service}
+                badge="Available"
+                icon={<Wrench className="h-5 w-5" />}
+              >
+                <p className="text-slate-300 leading-relaxed">
+                  Focused delivery for security, automation, and software engagements with a project-first workflow.
+                </p>
+              </UnifiedCard>
+            ))}
           </div>
         </div>
       </motion.section>
@@ -652,7 +814,7 @@ function App() {
   className="py-20"
 >
   {/* Expanded width to 1400px to match other sections */}
-  <div className="mx-auto max-w-[1400px] px-6 w-full">
+  <div className="mx-auto max-w-[1600px] px-6 w-full">
     
     {/* Main Glass Panel Wrapper - Matches Sentinel-Scan theme */}
     <div className="bg-[#060b13]/80 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-12">
@@ -682,7 +844,7 @@ function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="py-20"
         >
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-[1600px] px-6">
           <div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Credential_Stack</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Achievements</h2>
@@ -690,16 +852,15 @@ function App() {
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             {achievements.map((achievement, index) => (
-              <AdvancedCard key={index} className="group transition hover:border-neon-teal/40">
-                <div className="mb-4 flex items-center gap-3 group">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-3xl bg-slate-800 text-slate-500 transition-colors group-hover:text-neon-teal">
-                    <Award className="h-5 w-5" />
-                  </span>
-                  <h3 className="text-xl font-semibold text-white">{achievement.title}</h3>
-                </div>
-                <div className="border-b border-dashed border-white/10 pb-5 mb-5" />
-                <p className="text-slate-300 leading-relaxed font-mono">{achievement.description}</p>
-              </AdvancedCard>
+              <UnifiedCard
+                key={index}
+                eyebrow="Achievement"
+                title={achievement.title}
+                badge="Highlighted"
+                icon={<Award className="h-5 w-5" />}
+              >
+                <p className="text-slate-300 leading-relaxed">{achievement.description}</p>
+              </UnifiedCard>
             ))}
           </div>
         </div>
@@ -716,7 +877,7 @@ function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="py-20 px-4 sm:px-6 lg:px-8"
         >
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-[1600px] mx-auto px-6">
 <div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Certification_Roster</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Certifications</h2>
@@ -724,40 +885,39 @@ function App() {
           </div>
 
           {/* Featured CEH Certification */}
-          <div className="mb-16">
-            <AdvancedCard className="border border-slate-500/40 shadow-[0_0_20px_rgba(0,163,204,0.15)]">
-              <div className="text-center py-8">
-                <div className="text-6xl mb-6">🏆</div>
-                <h3 className="text-3xl font-bold text-slate-200 mb-3 font-medium uppercase tracking-wide">Certified Ethical Hacker</h3>
-                <p className="text-base text-slate-400 mb-4 font-light">EC-Council</p>
-                <div className="flex justify-center gap-4 flex-wrap mb-6">
-                  <Badge variant="default" className="text-xs">March 2026</Badge>
-                  <Badge variant="secondary" className="text-xs">PROFESSIONAL</Badge>
-                </div>
-                <div className="mt-6 p-4 bg-[#0a0a0a]/40 backdrop-blur-md rounded-none border border-white/5 text-left max-w-2xl mx-auto">
-                  <p className="text-xs text-slate-400 font-mono leading-relaxed">
-                    ✓ Advanced Penetration Testing Expertise<br/>
-                    ✓ Network & Application Security Assessment<br/>
-                    ✓ Ethical Hacking & System Exploitation<br/>
-                    ✓ Cryptography & Digital Forensics
-                  </p>
-                </div>
-              </div>
-            </AdvancedCard>
-          </div>
+          <div className="mb-16">
+            <UnifiedCard
+              eyebrow="Certification"
+              title="Certified Ethical Hacker"
+              badge="Professional"
+              icon={<Award className="h-5 w-5" />}
+            >
+              <p className="text-slate-300 leading-relaxed">EC-Council credential issued in March 2026.</p>
+              <div className="flex flex-wrap gap-3">
+                <Badge variant="outline">Advanced Penetration Testing</Badge>
+                <Badge variant="outline">Application Security</Badge>
+                <Badge variant="outline">System Exploitation</Badge>
+                <Badge variant="outline">Digital Forensics</Badge>
+              </div>
+            </UnifiedCard>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {certifications.filter(cert => cert.name !== 'Certified Ethical Hacker (CEH)').map((cert, index) => (
-              <AdvancedCard key={index} className="text-center flex flex-col">
-                <div className="text-5xl mb-4">{cert.icon}</div>
-                <h3 className="text-lg font-bold mb-2 font-mono text-white uppercase tracking-wider text-sm">{cert.name}</h3>
-                <p className="text-slate-300 mb-4 flex-1">{cert.issuer}</p>
-                <div className="flex gap-2 justify-center flex-wrap">
-                  <Badge variant="outline">{cert.date}</Badge>
-                  <Badge variant="secondary">{cert.level}</Badge>
-                </div>
-              </AdvancedCard>
-            ))}
+            {certifications.filter(cert => cert.name !== 'Certified Ethical Hacker (CEH)').map((cert, index) => (
+              <UnifiedCard
+                key={index}
+                eyebrow="Certification"
+                title={cert.name}
+                badge={cert.level}
+                center={true}
+              >
+                <div className="text-5xl">{cert.icon}</div>
+                <p className="text-slate-300">{cert.issuer}</p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  <Badge variant="outline">{cert.date}</Badge>
+                </div>
+              </UnifiedCard>
+            ))}
           </div>
         </div>
       </motion.section>
@@ -773,7 +933,7 @@ function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="py-20 px-4 sm:px-6 lg:px-8"
         >
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-[1600px] mx-auto px-6">
           <div className="mb-12 border-l-2 border-neon-teal pl-6">
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Tools_Network</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Tools & Platforms</h2>
@@ -781,41 +941,37 @@ function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AdvancedCard>
-              <h3 className="text-lg font-bold mb-6 font-mono text-white uppercase tracking-wider text-sm">Penetration Testing</h3>
+            <UnifiedCard eyebrow="Toolkit" title="Penetration Testing" badge="Core" icon={<Shield className="h-5 w-5" />}>
               <div className="flex flex-wrap gap-3">
                 {tools.pentesting.map((tool, index) => (
                   <Badge key={index} variant="outline" className="font-mono text-xs">{tool}</Badge>
                 ))}
               </div>
-            </AdvancedCard>
+            </UnifiedCard>
 
-            <AdvancedCard>
-              <h3 className="text-lg font-bold mb-6 font-mono text-white uppercase tracking-wider text-sm">OSINT & Forensics</h3>
+            <UnifiedCard eyebrow="Toolkit" title="OSINT & Forensics" badge="Research" icon={<Search className="h-5 w-5" />}>
               <div className="flex flex-wrap gap-3">
                 {tools.osint.map((tool, index) => (
                   <Badge key={index} variant="outline" className="font-mono text-xs">{tool}</Badge>
                 ))}
               </div>
-            </AdvancedCard>
+            </UnifiedCard>
 
-            <AdvancedCard>
-              <h3 className="text-lg font-bold mb-6 font-mono text-white uppercase tracking-wider text-sm">Scripting & Automation</h3>
+            <UnifiedCard eyebrow="Toolkit" title="Scripting & Automation" badge="Build" icon={<Code className="h-5 w-5" />}>
               <div className="flex flex-wrap gap-3">
                 {tools.scripting.map((tool, index) => (
                   <Badge key={index} variant="outline" className="font-mono text-xs">{tool}</Badge>
                 ))}
               </div>
-            </AdvancedCard>
+            </UnifiedCard>
 
-            <AdvancedCard>
-              <h3 className="text-lg font-bold mb-6 font-mono text-white uppercase tracking-wider text-sm">Environments</h3>
+            <UnifiedCard eyebrow="Toolkit" title="Environments" badge="Runtime" icon={<Target className="h-5 w-5" />}>
               <div className="flex flex-wrap gap-3">
                 {tools.environments.map((tool, index) => (
                   <Badge key={index} variant="outline" className="font-mono text-xs">{tool}</Badge>
                 ))}
               </div>
-            </AdvancedCard>
+            </UnifiedCard>
           </div>
         </div>
       </motion.section>
@@ -831,7 +987,7 @@ function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="py-20 px-4 sm:px-6 lg:px-8"
         >
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-[1600px] mx-auto px-6">
           <div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Contact_Protocol</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Get in Touch</h2>
@@ -847,6 +1003,10 @@ function App() {
               <div className="space-y-3">
                 <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Email</p>
                 <p className="text-lg text-white">haiderusama707@gmail.com</p>
+              </div>
+              <div className="space-y-3">
+                <p className="text-sm uppercase tracking-[0.28em] text-slate-400">WhatsApp</p>
+                <p className="text-lg text-white">+92 349 6000899</p>
               </div>
               <div className="space-y-3">
                 <p className="text-sm uppercase tracking-[0.28em] text-slate-400">Connect</p>
@@ -883,6 +1043,17 @@ function App() {
                     className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
                   >
                     <Mail size={20} />
+                  </motion.button>
+                  <motion.button
+                    type="button"
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: 'spring', stiffness: 240, damping: 18 }}
+                    onClick={() => window.open('https://wa.me/923496000899', '_blank')}
+                    aria-label="WhatsApp"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_40px_rgba(0,0,0,0.2)]"
+                  >
+                    <WhatsAppIcon size={20} />
                   </motion.button>
                 </div>
               </div>
@@ -936,7 +1107,7 @@ function App() {
       </motion.section>
 
       <footer className="border-t border-white/10 py-10">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-[1600px] mx-auto px-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm text-slate-300">© 2026 Usama Haider.</p>
