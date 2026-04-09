@@ -538,14 +538,14 @@ function App() {
     <div className="grid gap-12 xl:grid-cols-[1.12fr_0.88fr] xl:items-start">
       <div className="space-y-8">
         {/* This tag should now be fully visible below your navbar */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.26em] text-slate-300">
+        <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-slate-300 sm:rounded-full sm:text-xs sm:tracking-[0.26em]">
           Cybersecurity Professional | Certified Ethical Hacker (CEH) | Software Developer
         </div>
-        <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
           USAMA <span className="text-white">HAIDER</span>
         </h1>
         
-                <div className="text-xl font-mono text-slate-400 mt-4 h-8">
+                <div className="mt-4 h-12 text-base font-mono text-slate-400 sm:h-8 sm:text-xl">
                   <TypeAnimation
                     sequence={['// Penetration Tester', 1000, '// Certified Ethical Hacker', 1000, '// Security Researcher', 1000, '// Software Developer', 1000]}
                     wrapper="span"
@@ -553,21 +553,21 @@ function App() {
                     repeat={Infinity}
                   />
                 </div>
-                <p className="max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl mt-4">
+                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-xl">
                   I am a Cybersecurity Researcher, Ethical Hacker, and Software Developer with hands-on penetration testing, OSINT investigations, and secure software development. I specialize in identifying vulnerabilities, securing infrastructures, and building tools that enhance cyber defense.
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <Button onClick={() => scrollToSection('projects')} className="bg-white/10 hover:bg-white/15">Explore Projects</Button>
-                  <Button variant="outline" onClick={() => scrollToSection('contact')}>Request Assessment</Button>
+                <div className="flex flex-wrap gap-3 sm:gap-4">
+                  <Button onClick={() => scrollToSection('projects')} className="w-full justify-center bg-white/10 hover:bg-white/15 sm:w-auto">Explore Projects</Button>
+                  <Button variant="outline" onClick={() => scrollToSection('contact')} className="w-full justify-center sm:w-auto">Request Assessment</Button>
                 </div>
-                <div className="mt-6 flex flex-wrap gap-4">
+                <div className="mt-6 flex flex-wrap gap-3 sm:gap-4">
                   <motion.button
                     type="button"
                     whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
                     whileTap={{ scale: 0.96 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                     onClick={() => window.open('https://www.linkedin.com/in/usama-haider-1968a91a1/', '_blank')}
-                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
                     aria-label="LinkedIn"
                   >
                     <Linkedin size={22} />
@@ -579,7 +579,7 @@ function App() {
                     whileTap={{ scale: 0.96 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                     onClick={() => window.open('https://github.com/Haider899', '_blank')}
-                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
                     aria-label="GitHub"
                   >
                     <Github size={22} />
@@ -591,7 +591,7 @@ function App() {
                     whileTap={{ scale: 0.96 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 18 }}
                     onClick={() => window.open('mailto:haiderusama707@gmail.com', '_blank')}
-                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
                     aria-label="Email"
                   >
                     <Mail size={22} />
@@ -625,8 +625,8 @@ function App() {
               </div>
 
               <div className="relative">
-                <div className="glass-panel rounded-[2.5rem] p-8">
-                  <div className="mb-8 flex items-center justify-between">
+                <div className="glass-panel rounded-[2rem] p-5 sm:rounded-[2.5rem] sm:p-8">
+                  <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
                     <div>
                       <p className="text-xs uppercase tracking-[0.32em] text-slate-400">Capabilities</p>
                       <h2 className="mt-3 text-2xl font-semibold text-white">Professional Edge</h2>
@@ -635,7 +635,7 @@ function App() {
                       CEH
                     </div>
                   </div>
-                  <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
                     {capabilityItems.map((item) => {
                       const Icon = item.icon
                       return (
@@ -652,7 +652,7 @@ function App() {
                     })}
                   </div>
 
-                  <div className="terminal-shell mt-8 rounded-[2rem] border border-white/10 bg-[#06111f]/85 p-6 text-slate-300 shadow-[0_20px_70px_rgba(0,0,0,0.18)]">
+                  <div className="terminal-shell mt-8 rounded-[1.5rem] border border-white/10 bg-[#06111f]/85 p-4 text-slate-300 shadow-[0_20px_70px_rgba(0,0,0,0.18)] sm:rounded-[2rem] sm:p-6">
                     <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
                       <div>
                         <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500">Mission Control</p>
