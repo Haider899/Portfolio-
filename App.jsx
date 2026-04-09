@@ -176,7 +176,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'skills', 'services', 'projects', 'achievements', 'certifications', 'tools', 'goals']
+      const sections = ['home', 'skills', 'services', 'projects', 'achievements', 'certifications', 'tools' ]
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -269,7 +269,7 @@ function App() {
               <span className="gradient-text">Usama Haider</span>
             </h1>
             <p className="text-xl sm:text-2xl text-muted-foreground mb-8">
-              Cybersecurity Researcher & Software Developer
+              Cybersecurity Researcher & Software Developer & Certified Ethical Hacker (CEH)
             </p>
             <p className="text-lg text-foreground max-w-4xl mx-auto mb-12 leading-relaxed">
               I am a Cybersecurity Researcher, Ethical Hacker, and Software Developer with hands-on experience in penetration testing, 
@@ -279,7 +279,7 @@ function App() {
             </p>
             <p className="text-md text-muted-foreground mb-8">
               Currently working at Doart Energy, where I received the Programming Excellence Award for my contributions 
-              in automation, tool development, and system optimization.
+              in automation, ERP development, and system optimization.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
