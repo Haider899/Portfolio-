@@ -198,7 +198,7 @@ function App() {
       'WordPress Security Testing',
       'API Pentesting',
       'HTTP Header Manipulation',
-      'Firewall Bypass Testing'
+      'Web Application Security Testing'
     ],
     programming: [
       'Python',
@@ -404,6 +404,15 @@ function App() {
     }
   }
 
+  const heroHexItems = [
+    { title: 'CEH', subtitle: 'Certified' },
+    { title: 'Python', subtitle: 'Automation' },
+    { title: '</>', subtitle: 'Secure Code' },
+    { title: 'OSINT', subtitle: 'Intel' },
+    { title: 'CLI', subtitle: 'Terminal' },
+    { title: 'React', subtitle: 'UI Systems' }
+  ]
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId)
     if (element) {
@@ -527,198 +536,186 @@ function App() {
   whileInView={{ opacity: 1, y: 0 }}
   viewport={{ once: true }}
   transition={{ duration: 0.8, ease: 'easeOut' }}
-
-  className="relative pt-32 pb-24 overflow-hidden min-h-screen"
+  className="hero-shell relative pt-32 pb-24 overflow-hidden min-h-screen"
 >
-  <div className="absolute inset-x-0 top-20 h-[420px] bg-[radial-gradient(circle_at_top_left,_rgba(110,158,198,0.18),_transparent_36%)] pointer-events-none" />
-  
-  <div className="absolute right-0 top-24 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,_rgba(255,255,255,0.08),_transparent_65%)] blur-3xl pointer-events-none" />
-  
+  <div className="hero-shell__mist pointer-events-none" />
+  <div className="hero-shell__mesh pointer-events-none" />
+  <div className="hero-shell__beam pointer-events-none" />
+
   <div className="mx-auto max-w-[1600px] px-6">
-    <div className="grid gap-12 xl:grid-cols-[1.12fr_0.88fr] xl:items-start">
-      <div className="space-y-8">
-        {/* This tag should now be fully visible below your navbar */}
+    <div className="grid gap-10 xl:grid-cols-[1.02fr_0.98fr] xl:items-center">
+      <div className="space-y-7">
         <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-slate-300 sm:rounded-full sm:text-xs sm:tracking-[0.26em]">
-          Cybersecurity Professional | Certified Ethical Hacker (CEH) | Software Developer
+          Cybersecurity Professional | Certified Ethical Hacker (CEH) | Software Engineer
         </div>
-        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
-          USAMA <span className="text-white">HAIDER</span>
-        </h1>
-        
-                <div className="mt-4 h-12 text-base font-mono text-slate-400 sm:h-8 sm:text-xl">
-                  <TypeAnimation
-                    sequence={['// Penetration Tester', 1000, '// Certified Ethical Hacker', 1000, '// Security Researcher', 1000, '// Software Developer', 1000]}
-                    wrapper="span"
-                    cursor={true}
-                    repeat={Infinity}
-                  />
-                </div>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-xl">
-                  I am a Cybersecurity Researcher, Ethical Hacker, and Software Developer with hands-on penetration testing, OSINT investigations, and secure software development. I specialize in identifying vulnerabilities, securing infrastructures, and building tools that enhance cyber defense.
-                </p>
-                <div className="flex flex-wrap gap-3 sm:gap-4">
-                  <Button onClick={() => scrollToSection('projects')} className="w-full justify-center bg-white/10 hover:bg-white/15 sm:w-auto">Explore Projects</Button>
-                  <Button variant="outline" onClick={() => scrollToSection('contact')} className="w-full justify-center sm:w-auto">Request Assessment</Button>
-                </div>
-                <div className="mt-6 flex flex-wrap gap-3 sm:gap-4">
-                  <motion.button
-                    type="button"
-                    whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                    onClick={() => window.open('https://www.linkedin.com/in/usama-haider-1968a91a1/', '_blank')}
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin size={22} />
-                  </motion.button>
+        <div className="space-y-4">
+          <p className="hero-shell__kicker">Operator Identity</p>
+          <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            USAMA <span className="text-slate-300">HAIDER</span>
+          </h1>
+        </div>
+        <div className="mt-2 h-12 text-base font-mono text-slate-300 sm:h-8 sm:text-xl">
+          <TypeAnimation
+            sequence={['// Penetration Tester', 1000, '// Certified Ethical Hacker', 1000, '// Security Researcher', 1000, '// Software Developer', 1000]}
+            wrapper="span"
+            cursor={true}
+            repeat={Infinity}
+          />
+        </div>
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-xl">
+          I am a Cybersecurity Researcher, Ethical Hacker, and Software Developer with hands-on penetration testing, ethical hacking, OSINT investigations, and secure software development. I specialize in identifying vulnerabilities, securing infrastructures, and building tools that enhance cyber defense.
+        </p>
+        <div className="flex flex-wrap gap-3 sm:gap-4">
+          <Button onClick={() => scrollToSection('projects')} className="hero-shell__button w-full justify-center bg-white/10 hover:bg-white/15 sm:w-auto">Explore Projects</Button>
+          <Button variant="outline" onClick={() => scrollToSection('contact')} className="hero-shell__button w-full justify-center sm:w-auto">Request Assessment</Button>
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3 sm:gap-4">
+          <motion.button
+            type="button"
+            whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+            onClick={() => window.open('https://www.linkedin.com/in/usama-haider-1968a91a1/', '_blank')}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={22} />
+          </motion.button>
 
-                  <motion.button
-                    type="button"
-                    whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                    onClick={() => window.open('https://github.com/Haider899', '_blank')}
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
-                    aria-label="GitHub"
-                  >
-                    <Github size={22} />
-                  </motion.button>
+          <motion.button
+            type="button"
+            whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+            onClick={() => window.open('https://github.com/Haider899', '_blank')}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
+            aria-label="GitHub"
+          >
+            <Github size={22} />
+          </motion.button>
 
-                  <motion.button
-                    type="button"
-                    whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-                    onClick={() => window.open('mailto:haiderusama707@gmail.com', '_blank')}
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
-                    aria-label="Email"
-                  >
-                    <Mail size={22} />
-                  </motion.button>
-                </div>
-                <div className="hero-ops-panel">
-                  <div className="hero-ops-panel__header">
-                    <span className="hero-ops-panel__eyebrow">Operator Snapshot</span>
-                    <span className="hero-ops-panel__status">Active</span>
-                  </div>
-                  <div className="hero-ops-panel__grid">
-                    <div className="hero-ops-stat">
-                      <span className="hero-ops-stat__label">Focus</span>
-                      <span className="hero-ops-stat__value">AppSec</span>
-                    </div>
-                    <div className="hero-ops-stat">
-                      <span className="hero-ops-stat__label">Mode</span>
-                      <span className="hero-ops-stat__value">Research</span>
-                    </div>
-                    <div className="hero-ops-stat">
-                      <span className="hero-ops-stat__label">Stack</span>
-                      <span className="hero-ops-stat__value">Python / React</span>
-                    </div>
-                  </div>
-                  <div className="hero-ops-panel__terminal">
-                    <span className="terminal-prompt">live</span>
-                    <span className="terminal-command">$</span>
-                    <span className="text-slate-300">tracking signals, building tools, shipping secure systems</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="glass-panel rounded-[2rem] p-5 sm:rounded-[2.5rem] sm:p-8">
-                  <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">Capabilities</p>
-                      <h2 className="mt-3 text-2xl font-semibold text-white">Professional Edge</h2>
-                    </div>
-                    <div className="rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-[11px] uppercase tracking-[0.3em] text-slate-300">
-                      CEH
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-                    {capabilityItems.map((item) => {
-                      const Icon = item.icon
-                      return (
-                        <div key={item.title} className="capability-node">
-                          <div className="capability-node__icon">
-                            <Icon className="h-4 w-4" />
-                          </div>
-                          <div className="mt-3 space-y-1">
-                            <p className="text-sm font-semibold leading-tight text-white">{item.title}</p>
-                            <p className="text-[10px] uppercase tracking-[0.28em] text-slate-500">{item.accent}</p>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-
-                  <div className="terminal-shell mt-8 rounded-[1.5rem] border border-white/10 bg-[#06111f]/85 p-4 text-slate-300 shadow-[0_20px_70px_rgba(0,0,0,0.18)] sm:rounded-[2rem] sm:p-6">
-                    <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
-                      <div>
-                        <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500">Mission Control</p>
-                        <h3 className="mt-2 text-xl font-semibold text-white">{consoleModes[activeConsoleMode].title}</h3>
-                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">{consoleModes[activeConsoleMode].description}</p>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {Object.entries(consoleModes).map(([mode, config]) => (
-                          <button
-                            key={mode}
-                            type="button"
-                            onClick={() => setActiveConsoleMode(mode)}
-                            className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.28em] transition ${
-                              activeConsoleMode === mode
-                                ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-200'
-                                : 'border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10'
-                            }`}
-                          >
-                            {config.tags[0]}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      {consoleModes[activeConsoleMode].tags.map((tag) => (
-                        <span key={tag} className="rounded-full border border-cyan-400/15 bg-cyan-400/8 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-cyan-100">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="terminal-panel space-y-3 text-[13px] leading-6">
-                      <div className="terminal-toolbar">
-                        <span className="terminal-dot terminal-dot--red" />
-                        <span className="terminal-dot terminal-dot--amber" />
-                        <span className="terminal-dot terminal-dot--green" />
-                        <span className="terminal-toolbar__title">operator@portfolio:~/{activeConsoleMode}</span>
-                      </div>
-                      {consoleModes[activeConsoleMode].lines.map((line) => (
-                        <div key={`${activeConsoleMode}-${line.label}-${line.text}`} className="terminal-line">
-                          <span className="terminal-prompt">{line.label}</span>
-                          <span className="terminal-command">$</span>
-                          <span className="flex-1">{line.text}</span>
-                          <span className="text-slate-500">{line.status}</span>
-                        </div>
-                      ))}
-                      <div className="terminal-line terminal-line--cursor">
-                        <span className="terminal-prompt">shell</span>
-                        <span className="terminal-command">$</span>
-                        <span className="text-slate-400">awaiting operator input</span>
-                        <span className="terminal-cursor" />
-                      </div>
-                    </div>
-                    <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                      {consoleModes[activeConsoleMode].stats.map((stat) => (
-                        <div key={`${activeConsoleMode}-${stat.label}`} className="rounded-3xl border border-white/10 bg-white/5 p-4 text-center">
-                          <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{stat.label}</p>
-                          <p className="mt-2 text-2xl font-semibold text-white">{stat.value}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <motion.button
+            type="button"
+            whileHover={{ y: -6, scale: 1.06, rotateX: 4, rotateY: -4 }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+            onClick={() => window.open('mailto:haiderusama707@gmail.com', '_blank')}
+            className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-[0_18px_80px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all duration-300 sm:h-14 sm:w-14"
+            aria-label="Email"
+          >
+            <Mail size={22} />
+          </motion.button>
+        </div>
+        <div className="hero-ops-panel">
+          <div className="hero-ops-panel__header">
+            <span className="hero-ops-panel__eyebrow">Operator Snapshot</span>
+            <span className="hero-ops-panel__status">Active</span>
+          </div>
+          <div className="hero-ops-panel__grid">
+            <div className="hero-ops-stat">
+              <span className="hero-ops-stat__label">Focus</span>
+              <span className="hero-ops-stat__value">AppSec</span>
+            </div>
+            <div className="hero-ops-stat">
+              <span className="hero-ops-stat__label">Mode</span>
+              <span className="hero-ops-stat__value">Research</span>
+            </div>
+            <div className="hero-ops-stat">
+              <span className="hero-ops-stat__label">Stack</span>
+              <span className="hero-ops-stat__value">Python / React</span>
             </div>
           </div>
-    </motion.section>
+          <div className="hero-ops-panel__terminal">
+            <span className="terminal-prompt">live</span>
+            <span className="terminal-command">$</span>
+            <span className="text-slate-300">tracking signals, building tools, shipping secure systems</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="hero-visual">
+        <div className="hero-visual__brand">
+          <div className="hero-visual__brand-mark">
+            <Shield className="h-8 w-8" />
+          </div>
+        </div>
+        <div className="hero-visual__grid">
+          {heroHexItems.map((item, index) => (
+            <div key={item.title} className={`hero-hex hero-hex--${index + 1}`}>
+              <div className="hero-hex__inner">
+                <span className="hero-hex__title">{item.title}</span>
+                <span className="hero-hex__subtitle">{item.subtitle}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="terminal-shell hero-visual__terminal rounded-[1.5rem] border border-white/10 bg-[#0a1117]/80 p-4 text-slate-300 shadow-[0_24px_80px_rgba(0,0,0,0.22)] sm:rounded-[2rem] sm:p-6">
+          <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500">Mission Control</p>
+              <h3 className="mt-2 text-xl font-semibold text-white">{consoleModes[activeConsoleMode].title}</h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">{consoleModes[activeConsoleMode].description}</p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(consoleModes).map(([mode, config]) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setActiveConsoleMode(mode)}
+                  className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.28em] transition ${
+                    activeConsoleMode === mode
+                      ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-200'
+                      : 'border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10'
+                  }`}
+                >
+                  {config.tags[0]}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="mb-4 flex flex-wrap gap-2">
+            {consoleModes[activeConsoleMode].tags.map((tag) => (
+              <span key={tag} className="rounded-full border border-cyan-400/15 bg-cyan-400/8 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-cyan-100">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div className="terminal-panel space-y-3 text-[13px] leading-6">
+            <div className="terminal-toolbar">
+              <span className="terminal-dot terminal-dot--red" />
+              <span className="terminal-dot terminal-dot--amber" />
+              <span className="terminal-dot terminal-dot--green" />
+              <span className="terminal-toolbar__title">operator@portfolio:~/{activeConsoleMode}</span>
+            </div>
+            {consoleModes[activeConsoleMode].lines.map((line) => (
+              <div key={`${activeConsoleMode}-${line.label}-${line.text}`} className="terminal-line">
+                <span className="terminal-prompt">{line.label}</span>
+                <span className="terminal-command">$</span>
+                <span className="flex-1">{line.text}</span>
+                <span className="text-slate-500">{line.status}</span>
+              </div>
+            ))}
+            <div className="terminal-line terminal-line--cursor">
+              <span className="terminal-prompt">shell</span>
+              <span className="terminal-command">$</span>
+              <span className="text-slate-400">awaiting operator input</span>
+              <span className="terminal-cursor" />
+            </div>
+          </div>
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            {consoleModes[activeConsoleMode].stats.map((stat) => (
+              <div key={`${activeConsoleMode}-${stat.label}`} className="rounded-3xl border border-white/10 bg-white/5 p-4 text-center">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{stat.label}</p>
+                <p className="mt-2 text-2xl font-semibold text-white">{stat.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</motion.section>
 <motion.section
   id="skills"
   initial={{ opacity: 0, y: 30 }}

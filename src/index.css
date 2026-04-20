@@ -23,3 +23,31 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   padding: 8px 12px;
 }
+
+@layer components {
+  /* The "Glass" effect for cards */
+  .glass-card {
+    @apply bg-card-gray/60 backdrop-blur-md border border-white/5;
+  }
+
+  /* The divider line between sections */
+  .section-divider {
+    @apply h-[1px] w-full bg-gradient-to-r from-transparent via-border-gray to-transparent my-20;
+  }
+
+  /* Floating animation for the Shield/Logo */
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+/* Custom selection color to match your theme */
+::selection {
+  background: #00a3cc;
+  color: #000;
+}
