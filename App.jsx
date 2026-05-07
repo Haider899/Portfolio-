@@ -51,11 +51,15 @@ function App() {
       'Firewall Bypass Testing'
     ],
     programming: [
+      'Next.js 15',
+      'TypeScript',
+      'React',
       'Python',
       'PowerShell',
       'Bash Scripting',
       'Web Scraping',
-      'Windows & Linux Development'
+      'Liquid (Shopify)',
+      'Tailwind CSS'
     ]
   }
 
@@ -90,32 +94,60 @@ function App() {
 
   const projects = [
     {
-      title: 'Custom Ethical Hacking Toolkit',
-      description: 'USB-based penetration testing platform with custom Python scripts for reconnaissance, scanning, and exploitation testing',
-      technologies: ['Python', 'Bash', 'PowerShell', 'Kali Linux'],
-      link: 'https://github.com/Haider899',
+      title: 'EduManage Pro SMS',
+      description: 'An ultra-futuristic, SaaS-based School/College Management System featuring a "Security-First" architecture, 3D interactive dashboards, and real-time administrative telemetry.',
+      technologies: ['TypeScript', 'Next.js', 'Security-First', '3D Dashboards'],
+      link: 'https://github.com/Haider899/EduManage-Pro-SMS',
       status: 'Completed'
     },
     {
-      title: 'Python Security Automation Suite',
-      description: 'Automated security testing scripts for vulnerability assessments, network scanning, and threat intelligence gathering',
-      technologies: ['Python', 'OSINT', 'Scripting'],
-      link: 'https://github.com/Haider899',
+      title: 'Suffah Digital Web App',
+      description: 'State-of-the-art, responsive, and SEO-friendly web application for Islamic educational institutions, built with Next.js 15 and TypeScript.',
+      technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'SEO'],
+      link: 'https://github.com/Haider899/Suffah-Digital',
       status: 'Completed'
     },
     {
-      title: 'WordPress Security Audit Tool',
-      description: 'Comprehensive WordPress vulnerability scanner and security auditor for CMS penetration testing',
-      technologies: ['Python', 'WordPress API', 'Security Testing'],
-      link: 'https://github.com/Haider899',
+      title: 'Network Threat Visualizer',
+      description: 'A realistic network threat visualizer with server-side logic, PWA support, and automated security testing capabilities.',
+      technologies: ['JavaScript', 'PWA', 'Security Visualization', 'Node.js'],
+      link: 'https://github.com/Haider899/network-threat-visualizer',
       status: 'Completed'
     },
     {
-      title: 'Network Reconnaissance Framework',
-      description: 'Advanced network scanning and information gathering toolkit combining Nmap, custom scripts, and threat intelligence',
-      technologies: ['Python', 'Nmap', 'Network Security'],
-      link: 'https://github.com/Haider899',
-      status: 'In Progress'
+      title: 'Sentinel-Scan',
+      description: 'A powerful subdomain and asset discovery tool designed for security researchers to perform comprehensive reconnaissance.',
+      technologies: ['Python', 'OSINT', 'Reconnaissance', 'Security'],
+      link: 'https://github.com/Haider899/Sentinel-Scan',
+      status: 'Completed'
+    },
+    {
+      title: 'Al-Makkah Management',
+      description: 'Enterprise-grade management system for the automotive industry, focused on high-performance, security, and real-time data integrity.',
+      technologies: ['TypeScript', 'Enterprise-Grade', 'Automotive IT', 'Database'],
+      link: 'https://github.com/Haider899/Al-Makkah-Management',
+      status: 'Completed'
+    },
+    {
+      title: 'WordPress Security Auditor',
+      description: 'Professional WordPress security auditing tool and vulnerability scanner for CMS penetration testing.',
+      technologies: ['Python', 'WordPress API', 'Security Auditing'],
+      link: 'https://github.com/Haider899/WordPress-Security-Auditor',
+      status: 'Completed'
+    },
+    {
+      title: 'Lazy-Dorks',
+      description: 'Advanced Google and GitHub Dorking tool for security researchers to automate information gathering and vulnerability discovery.',
+      technologies: ['Python', 'Dorking', 'OSINT', 'Automation'],
+      link: 'https://github.com/Haider899/Lazy-Dorks',
+      status: 'Completed'
+    },
+    {
+      title: 'Custom Shopify Boutique',
+      description: 'Luxury Fragrances & Jewelry Shopify theme with a minimalist UI/UX, built for high performance and premium aesthetics.',
+      technologies: ['Liquid', 'Tailwind CSS', 'JavaScript', 'Shopify'],
+      link: 'https://github.com/Haider899/My-Shopify',
+      status: 'Completed'
     }
   ]
 
@@ -161,7 +193,7 @@ function App() {
   const tools = {
     pentesting: ['Burp Suite', 'Nmap', 'Bettercap', 'Hydra', 'SQLmap', 'Wireshark'],
     osint: ['Maltego', 'crt.sh', 'Recon-ng', 'Custom Python Scrapers'],
-    scripting: ['Python', 'PowerShell', 'Bash'],
+    scripting: ['Python', 'TypeScript', 'PowerShell', 'Bash', 'JavaScript'],
     environments: ['Kali Linux', 'Windows', 'Docker']
   }
 
