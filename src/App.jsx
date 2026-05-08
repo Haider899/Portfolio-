@@ -16,7 +16,12 @@ import {
   Linkedin,
   Mail,
   Star,
-  GitBranch
+  GitBranch,
+  Lock,
+  Bug,
+  Network,
+  Terminal,
+  Cpu
 } from 'lucide-react'
 import './App.css'
 
@@ -308,49 +313,49 @@ function App() {
       name: 'Certified Ethical Hacker (CEH)',
       issuer: 'EC-Council',
       date: '2026 (March)',
-      icon: 'assets/certs/ceh.png',
+      icon: <Shield className="h-8 w-8 text-cyan-400" />,
       level: 'Professional'
     },
     {
       name: 'Practical Network Penetration Tester',
       issuer: 'eLearnSecurity',
       date: '2024',
-      icon: 'assets/certs/pentest.png',
+      icon: <Network className="h-8 w-8 text-blue-400" />,
       level: 'Professional'
     },
     {
       name: 'Bug Bounty Hunter Certification',
       issuer: 'HackerOne Academy',
       date: '2024',
-      icon: 'assets/certs/bugbounty.png',
+      icon: <Bug className="h-8 w-8 text-cyan-500" />,
       level: 'Professional'
     },
     {
       name: 'Ethical Hacking & Penetration Testing',
       issuer: 'Cybersecurity Training Institute',
       date: '2023',
-      icon: 'assets/certs/hacking.png',
+      icon: <Lock className="h-8 w-8 text-blue-500" />,
       level: 'Intermediate'
     },
     {
       name: 'Advanced Python for Security',
       issuer: 'Python Academy',
       date: '2023',
-      icon: 'assets/certs/python.png',
+      icon: <Terminal className="h-8 w-8 text-cyan-400" />,
       level: 'Intermediate'
     },
     {
       name: 'OSINT Investigations Specialist',
       issuer: 'OSINT Academy',
       date: '2023',
-      icon: 'assets/certs/osint.png',
+      icon: <Search className="h-8 w-8 text-blue-400" />,
       level: 'Intermediate'
     },
     {
       name: 'Digital Forensics Professional',
       issuer: 'Forensics Institute',
       date: '2022',
-      icon: 'assets/certs/forensics.png',
+      icon: <Cpu className="h-8 w-8 text-cyan-500" />,
       level: 'Intermediate'
     }
   ]
@@ -894,15 +899,20 @@ function App() {
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Certification_Roster</span>
             <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Certifications</h2>
             <p className="mt-4 text-sm text-slate-400 font-light">Professional certifications and recognized credentials</p>
-          </div>
+        <div className="max-w-[1600px] mx-auto px-6">
+<div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
+            <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Certification_Roster</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Certifications</h2>
+            <p className="mt-4 text-sm text-slate-400 font-light">Professional certifications and recognized credentials</p>
+          </div>
 
-          {/* Featured CEH Certification */}
+          {/* Featured CEH Certification */}
           <div className="mb-16">
             <UnifiedCard
-              eyebrow="Certification"
+              eyebrow="Credential"
               title="Certified Ethical Hacker"
               badge="Professional"
-              icon="assets/certs/ceh.png"
+              icon={<Shield className="h-5 w-5 text-cyan-400" />}
             >
               <p className="text-slate-300 leading-relaxed">EC-Council credential issued in March 2026.</p>
               <div className="flex flex-wrap gap-3">
@@ -923,8 +933,8 @@ function App() {
                 badge={cert.level}
                 center={true}
               >
-                <div className="w-20 h-20 mx-auto mb-5 rounded-xl overflow-hidden border border-white/5 shadow-xl bg-slate-900/50">
-                  <img src={`${import.meta.env.BASE_URL}${cert.icon}`} alt={cert.name} className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100" />
+                <div className="flex h-16 w-16 mx-auto mb-5 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.1)]">
+                  {cert.icon}
                 </div>
                 <p className="text-slate-400 text-sm font-medium">{cert.issuer}</p>
                 <div className="mt-2">
