@@ -21,7 +21,10 @@ import {
   Bug,
   Network,
   Terminal,
-  Cpu
+  Cpu,
+  Settings,
+  Cloud,
+  Globe
 } from 'lucide-react'
 import './App.css'
 
@@ -485,15 +488,40 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#070c12] text-white relative">
-      {/* Initializing Loader */}
-      <div className={`boot-sequence ${isBooting ? 'boot-sequence--active' : 'boot-sequence--hidden'}`}>
-        <div className="tech-loader">
-          <div className="loader-ring loader-ring--1" />
-          <div className="loader-ring loader-ring--2" />
-          <div className="loader-ring loader-ring--3" />
-          <div className="loader-core" />
+      {/* Advanced HUD Initializing Loader */}
+      <div className={`boot-sequence ${isBooting ? '' : 'boot-sequence--hidden'}`}>
+        <div className="hud-loader">
+          <div className="hud-ring hud-ring--outer" />
+          <div className="hud-ring hud-ring--segments" />
+          <div className="hud-ring hud-ring--mid" />
+          <div className="hud-ring hud-ring--inner" />
+          
+          <div className="hud-core">
+            <Shield className="hud-shield w-12 h-12" />
+          </div>
+
+          {/* Orbiting Icons */}
+          {[
+            { icon: <Cloud size={16} />, delay: 0 },
+            { icon: <Settings size={16} />, delay: -2 },
+            { icon: <Mail size={16} />, delay: -4 },
+            { icon: <Globe size={16} />, delay: -6 },
+            { icon: <Terminal size={16} />, delay: -8 },
+            { icon: <Lock size={16} />, delay: -10 },
+            { icon: <Cpu size={16} />, delay: -12 }
+          ].map((item, i) => (
+            <div 
+              key={i} 
+              className="hud-orbit" 
+              style={{ animationDelay: `${item.delay}s` }}
+            >
+              <div className="hud-orbit-item">
+                {item.icon}
+              </div>
+            </div>
+          ))}
         </div>
-        <p className="loader-text">Initializing Systems...</p>
+        <p className="loader-status">Initializing Secure Environment...</p>
       </div>
       <div className="fixed inset-x-0 top-0 z-50 h-1 bg-white/10">
         <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 shadow-[0_0_20px_rgba(56,189,248,0.35)] transition-all duration-150 ease-out" style={{ width: `${scrollProgress}%` }} />
@@ -894,11 +922,6 @@ function App() {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="py-20 px-4 sm:px-6 lg:px-8"
         >
-        <div className="max-w-[1600px] mx-auto px-6">
-<div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
-            <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Certification_Roster</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter mt-2">Certifications</h2>
-            <p className="mt-4 text-sm text-slate-400 font-light">Professional certifications and recognized credentials</p>
         <div className="max-w-[1600px] mx-auto px-6">
 <div className="mb-12 border-l-2 border-neon-teal pl-6 section-heading">
             <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Certification_Roster</span>
