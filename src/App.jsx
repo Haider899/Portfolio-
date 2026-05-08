@@ -201,11 +201,15 @@ function App() {
       'Web Application Security Testing'
     ],
     programming: [
+      'Next.js 15',
+      'TypeScript',
+      'React',
       'Python',
       'PowerShell',
       'Bash Scripting',
       'Web Scraping',
-      'Windows & Linux Development'
+      'Liquid (Shopify)',
+      'Tailwind CSS'
     ]
   }
 
@@ -240,45 +244,59 @@ function App() {
 
   const projects = [
     {
+      title: 'EduManage Pro SMS',
+      description: 'An ultra-futuristic, SaaS-based School/College Management System featuring a "Security-First" architecture, 3D interactive dashboards, and real-time administrative telemetry.',
+      technologies: ['TypeScript', 'Next.js', 'Security-First', '3D Dashboards'],
+      link: 'https://github.com/Haider899/EduManage-Pro-SMS',
+      status: 'Completed'
+    },
+    {
+      title: 'Suffah Digital Web App',
+      description: 'State-of-the-art, responsive, and SEO-friendly web application for Islamic educational institutions, built with Next.js 15 and TypeScript.',
+      technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'SEO'],
+      link: 'https://github.com/Haider899/Suffah-Digital',
+      status: 'Completed'
+    },
+    {
+      title: 'Network Threat Visualizer',
+      description: 'A realistic network threat visualizer with server-side logic, PWA support, and automated security testing capabilities.',
+      technologies: ['JavaScript', 'PWA', 'Security Visualization', 'Node.js'],
+      link: 'https://github.com/Haider899/network-threat-visualizer',
+      status: 'Completed'
+    },
+    {
       title: 'Sentinel-Scan',
-      description: 'A powerful subdomain & asset discovery tool for security researchers. Helps identify exposed assets and potential vulnerabilities.',
-      technologies: ['Python', 'OSINT', 'Reconnaissance'],
+      description: 'A powerful subdomain and asset discovery tool designed for security researchers to perform comprehensive reconnaissance.',
+      technologies: ['Python', 'OSINT', 'Reconnaissance', 'Security'],
       link: 'https://github.com/Haider899/Sentinel-Scan',
       status: 'Completed'
     },
     {
-      title: 'WordPress-Security-Auditor',
-      description: 'WP-SEC-AUDIT: Professional WordPress Security Auditor & Vulnerability Scanner for comprehensive CMS security testing.',
-      technologies: ['Python', 'WordPress', 'Security Audit'],
+      title: 'Al-Makkah Management',
+      description: 'Enterprise-grade management system for the automotive industry, focused on high-performance, security, and real-time data integrity.',
+      technologies: ['TypeScript', 'Enterprise-Grade', 'Automotive IT', 'Database'],
+      link: 'https://github.com/Haider899/Al-Makkah-Management',
+      status: 'Completed'
+    },
+    {
+      title: 'WordPress Security Auditor',
+      description: 'Professional WordPress security auditing tool and vulnerability scanner for CMS penetration testing.',
+      technologies: ['Python', 'WordPress API', 'Security Auditing'],
       link: 'https://github.com/Haider899/WordPress-Security-Auditor',
       status: 'Completed'
     },
     {
       title: 'Lazy-Dorks',
-      description: 'Advanced Google & GitHub Dorking Tool for Security Researchers. Automates comprehensive dork searches for vulnerability discovery.',
-      technologies: ['Python', 'Google Dorking', 'GitHub OSINT'],
+      description: 'Advanced Google and GitHub Dorking tool for security researchers to automate information gathering and vulnerability discovery.',
+      technologies: ['Python', 'Dorking', 'OSINT', 'Automation'],
       link: 'https://github.com/Haider899/Lazy-Dorks',
       status: 'Completed'
     },
     {
-      title: 'Universal-Web-Scraper',
-      description: 'A powerful universal web scraper that works on ANY website with interactive menus and advanced parsing capabilities.',
-      technologies: ['Python', 'Web Scraping', 'BeautifulSoup'],
-      link: 'https://github.com/Haider899/universal-web-scraper',
-      status: 'Completed'
-    },
-    {
-      title: 'Vanguard-X',
-      description: 'Advanced threat analysis and security research toolkit with multiple exploitation and reconnaissance capabilities.',
-      technologies: ['Python', 'Threat Analysis', 'Security Research'],
-      link: 'https://github.com/Haider899/Vanguard-X',
-      status: 'Completed'
-    },
-    {
-      title: 'Network-Threat-Visualizer',
-      description: 'A realistic network threat visualizer with server, PWA, configuration, and automated browser tests for security visualization.',
-      technologies: ['JavaScript', 'React', 'Network Visualization'],
-      link: 'https://github.com/Haider899/network-threat-visualizer',
+      title: 'Custom Shopify Boutique',
+      description: 'Luxury Fragrances & Jewelry Shopify theme with a minimalist UI/UX, built for high performance and premium aesthetics.',
+      technologies: ['Liquid', 'Tailwind CSS', 'JavaScript', 'Shopify'],
+      link: 'https://github.com/Haider899/My-Shopify',
       status: 'Completed'
     }
   ]
