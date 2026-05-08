@@ -145,7 +145,7 @@ const UnifiedCard = ({ eyebrow, title, badge, icon, children, footer, center = f
             <div className={`mt-3 flex gap-3 ${center ? 'flex-col items-center' : 'items-start'}`}>
               {icon ? (
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-3xl border border-white/10 bg-white/5 text-slate-200 overflow-hidden">
-                  {typeof icon === 'string' ? <img src={icon} alt="" className="w-full h-full object-cover" /> : icon}
+                  {typeof icon === 'string' ? <img src={icon.startsWith('http') ? icon : `${import.meta.env.BASE_URL}${icon.startsWith('/') ? icon.slice(1) : icon}`} alt="" className="w-full h-full object-cover" /> : icon}
                 </span>
               ) : null}
               <h3 className="min-w-0 max-w-full text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl [overflow-wrap:anywhere]">
@@ -308,49 +308,49 @@ function App() {
       name: 'Certified Ethical Hacker (CEH)',
       issuer: 'EC-Council',
       date: '2026 (March)',
-      icon: '/assets/certs/ceh.png',
+      icon: 'assets/certs/ceh.png',
       level: 'Professional'
     },
     {
       name: 'Practical Network Penetration Tester',
       issuer: 'eLearnSecurity',
       date: '2024',
-      icon: '/assets/certs/pentest.png',
+      icon: 'assets/certs/pentest.png',
       level: 'Professional'
     },
     {
       name: 'Bug Bounty Hunter Certification',
       issuer: 'HackerOne Academy',
       date: '2024',
-      icon: '/assets/certs/bugbounty.png',
+      icon: 'assets/certs/bugbounty.png',
       level: 'Professional'
     },
     {
       name: 'Ethical Hacking & Penetration Testing',
       issuer: 'Cybersecurity Training Institute',
       date: '2023',
-      icon: '/assets/certs/hacking.png',
+      icon: 'assets/certs/hacking.png',
       level: 'Intermediate'
     },
     {
       name: 'Advanced Python for Security',
       issuer: 'Python Academy',
       date: '2023',
-      icon: '/assets/certs/python.png',
+      icon: 'assets/certs/python.png',
       level: 'Intermediate'
     },
     {
       name: 'OSINT Investigations Specialist',
       issuer: 'OSINT Academy',
       date: '2023',
-      icon: '/assets/certs/osint.png',
+      icon: 'assets/certs/osint.png',
       level: 'Intermediate'
     },
     {
       name: 'Digital Forensics Professional',
       issuer: 'Forensics Institute',
       date: '2022',
-      icon: '/assets/certs/forensics.png',
+      icon: 'assets/certs/forensics.png',
       level: 'Intermediate'
     }
   ]
@@ -905,7 +905,7 @@ function App() {
               eyebrow="Certification"
               title="Certified Ethical Hacker"
               badge="Professional"
-              icon="/assets/certs/ceh.png"
+              icon="assets/certs/ceh.png"
             >
               <p className="text-slate-300 leading-relaxed">EC-Council credential issued in March 2026.</p>
               <div className="flex flex-wrap gap-3">
@@ -927,7 +927,7 @@ function App() {
                 center={true}
               >
                 <div className="w-24 h-24 mx-auto mb-6 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                  <img src={cert.icon} alt={cert.name} className="w-full h-full object-cover" />
+                  <img src={`${import.meta.env.BASE_URL}${cert.icon}`} alt={cert.name} className="w-full h-full object-cover" />
                 </div>
                 <p className="text-slate-300">{cert.issuer}</p>
                 <div className="flex flex-wrap justify-center gap-2">
