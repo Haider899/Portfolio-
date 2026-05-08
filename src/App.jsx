@@ -480,18 +480,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-[#070c12] text-white relative">
+      {/* Initializing Loader */}
       <div className={`boot-sequence ${isBooting ? 'boot-sequence--active' : 'boot-sequence--hidden'}`}>
-        <div className="boot-sequence__panel">
-          <p className="boot-sequence__eyebrow">Initializing</p>
-          <div className="boot-sequence__bar">
-            <span className="boot-sequence__bar-fill" />
-          </div>
-          <div className="boot-sequence__lines">
-            <p>Loading operator profile...</p>
-            <p>Mounting secure interface...</p>
-            <p>Synchronizing mission modules...</p>
-          </div>
+        <div className="tech-loader">
+          <div className="loader-ring loader-ring--1" />
+          <div className="loader-ring loader-ring--2" />
+          <div className="loader-ring loader-ring--3" />
+          <div className="loader-core" />
         </div>
+        <p className="loader-text">Initializing Systems...</p>
       </div>
       <div className="fixed inset-x-0 top-0 z-50 h-1 bg-white/10">
         <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 shadow-[0_0_20px_rgba(56,189,248,0.35)] transition-all duration-150 ease-out" style={{ width: `${scrollProgress}%` }} />
@@ -921,17 +918,17 @@ function App() {
             {certifications.filter(cert => cert.name !== 'Certified Ethical Hacker (CEH)').map((cert, index) => (
               <UnifiedCard
                 key={index}
-                eyebrow="Certification"
+                eyebrow="Credential"
                 title={cert.name}
                 badge={cert.level}
                 center={true}
               >
-                <div className="w-24 h-24 mx-auto mb-6 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                  <img src={`${import.meta.env.BASE_URL}${cert.icon}`} alt={cert.name} className="w-full h-full object-cover" />
+                <div className="w-20 h-20 mx-auto mb-5 rounded-xl overflow-hidden border border-white/5 shadow-xl bg-slate-900/50">
+                  <img src={`${import.meta.env.BASE_URL}${cert.icon}`} alt={cert.name} className="w-full h-full object-cover opacity-90 transition-opacity hover:opacity-100" />
                 </div>
-                <p className="text-slate-300">{cert.issuer}</p>
-                <div className="flex flex-wrap justify-center gap-2">
-                  <Badge variant="outline">{cert.date}</Badge>
+                <p className="text-slate-400 text-sm font-medium">{cert.issuer}</p>
+                <div className="mt-2">
+                  <Badge variant="outline" className="text-[10px] uppercase tracking-wider opacity-60">{cert.date}</Badge>
                 </div>
               </UnifiedCard>
             ))}
