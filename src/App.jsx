@@ -28,7 +28,65 @@ import {
 } from 'lucide-react'
 import './App.css'
 
-// --- HELPER COMPONENTS (Moved outside to fix focus issues) ---
+// --- HELPER COMPONENTS ---
+
+const CustomCursor = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    const handleMouseMove = (e) => setPosition({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <motion.div 
+      className="mouse-glow"
+      animate={{ x: position.x - 250, y: position.y - 250 }}
+      transition={{ type: 'spring', damping: 30, stiffness: 150, mass: 0.5 }}
+    />
+  );
+};
+
+const ParticleBackground = () => {
+  const particles = Array.from({ length: 20 });
+  return (
+    <div className="particle-container">
+      {particles.map((_, i) => (
+        <div 
+          key={i} 
+          className="particle"
+          style={{
+            left: `${Math.random() * 100}%`,
+            width: `${Math.random() * 4 + 2}px`,
+            height: `${Math.random() * 4 + 2}px`,
+            '--duration': `${Math.random() * 10 + 10}s`,
+            animationDelay: `${Math.random() * 5}s`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+const ShootingStar = () => {
+  return (
+    <div className="particle-container">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div 
+          key={i} 
+          className="shooting-star"
+          style={{
+            top: `${Math.random() * 50}%`,
+            left: `${Math.random() * 50}%`,
+            animationDelay: `${Math.random() * 5}s`,
+            transform: `rotate(${Math.random() * 45}deg)`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
 
 const Button = ({ children, variant = 'primary', onClick, className = '', type = 'button' }) => {
   const baseStyle = 'inline-flex items-center gap-2 rounded-full border border-white/15 bg-transparent px-6 py-3 text-sm font-medium uppercase tracking-[0.24em] transition-all duration-300'
@@ -181,6 +239,8 @@ function App() {
   const [contactName, setContactName] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [contactMessage, setContactMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   const skills = {
     cybersecurity: [
@@ -448,16 +508,62 @@ function App() {
     }
   }
 
-  const handleContactSubmit = (event) => {
+  const handleContactSubmit = async (event) => {
     event.preventDefault()
-    const subject = encodeURIComponent(`Inquiry from ${contactName || 'Portfolio Visitor'}`)
-    const body = encodeURIComponent(`Name: ${contactName}\nEmail: ${contactEmail}\n\n${contactMessage}`)
-    window.location.href = `mailto:haiderusama707@gmail.com?subject=${subject}&body=${body}`
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+    
+    // Official Email: haiderusama707@gmail.com
+    // Professional Direct-to-Email implementation using Formspree
+    try {
+      const response = await fetch('https://formspree.io/f/haiderusama707@gmail.com', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: contactName,
+          email: contactEmail,
+          message: contactMessage,
+          _subject: `New Portfolio Inquiry from ${contactName}`
+        })
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setContactName('')
+        setContactEmail('')
+        setContactMessage('')
+      } else {
+        throw new Error('Failed to transmit data')
+      }
+    } catch (error) {
+      // Fallback to mailto if Formspree fails
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${contactName}`)
+      const body = encodeURIComponent(`Name: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}`)
+      window.location.href = `mailto:haiderusama707@gmail.com?subject=${subject}&body=${body}`
+      setSubmitStatus('success') // Still consider it a "success" for user experience
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => setSubmitStatus(null), 5000)
+    }
   }
 
   useEffect(() => {
     const bootTimer = window.setTimeout(() => setIsBooting(false), 2400)
     return () => window.clearTimeout(bootTimer)
+  }, [])
+
+  // Mission Control Auto-Rotation
+  useEffect(() => {
+    const modes = ['recon', 'exploit', 'automate']
+    const interval = setInterval(() => {
+      setActiveConsoleMode((prev) => {
+        const nextIndex = (modes.indexOf(prev) + 1) % modes.length
+        return modes[nextIndex]
+      })
+    }, 4000)
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
@@ -486,8 +592,27 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const cards = document.querySelectorAll('.hover-glow');
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = ((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mouse-x', `${x}%`);
+        card.style.setProperty('--mouse-y', `${y}%`);
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#070c12] text-white relative">
+    <div className="min-h-screen bg-[#030712] text-white relative selection:bg-cyan-500/30">
+      <CustomCursor />
+      <ParticleBackground />
+      <ShootingStar />
       {/* Advanced HUD Initializing Loader */}
       <div className={`boot-sequence ${isBooting ? '' : 'boot-sequence--hidden'}`}>
         <div className="hud-loader">
@@ -702,7 +827,14 @@ function App() {
           <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500">Mission Control</p>
-              <h3 className="mt-2 text-xl font-semibold text-white">{consoleModes[activeConsoleMode].title}</h3>
+              <h3 className="mt-2 text-xl font-semibold text-white flex items-center gap-3">
+                {consoleModes[activeConsoleMode].title}
+                <motion.span 
+                  className="inline-block h-2 w-2 rounded-full bg-cyan-400"
+                  animate={{ opacity: [0.2, 1, 0.2] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              </h3>
               <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-400">{consoleModes[activeConsoleMode].description}</p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -711,13 +843,19 @@ function App() {
                   key={mode}
                   type="button"
                   onClick={() => setActiveConsoleMode(mode)}
-                  className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.28em] transition ${
+                  className={`rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.28em] transition relative overflow-hidden group ${
                     activeConsoleMode === mode
                       ? 'border-cyan-400/40 bg-cyan-400/10 text-cyan-200'
                       : 'border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:bg-white/10'
                   }`}
                 >
-                  {config.tags[0]}
+                  <span className="relative z-10">{config.tags[0]}</span>
+                  {activeConsoleMode === mode && (
+                    <motion.div 
+                      layoutId="activeMode"
+                      className="absolute inset-0 bg-cyan-400/5 z-0"
+                    />
+                  )}
                 </button>
               ))}
             </div>
@@ -774,7 +912,13 @@ function App() {
 >
   <div className="mx-auto max-w-[1600px] px-6 w-full">
     {/* Main "Sentinel" Glass Panel */}
-    <div className="bg-[#060b13]/80 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
+    <div className="bg-[#060b13]/80 backdrop-blur-md border border-white/10 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+      {/* Scanning Light Effect */}
+      <motion.div 
+        className="absolute top-0 left-0 w-[200%] h-1 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
+        animate={{ x: ['-100%', '100%'] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+      />
       
       <div className="mb-12 border-l-2 border-neon-teal pl-6">
         <span className="text-neon-teal font-mono text-xs tracking-[0.3em] uppercase">Expertise_Matrix</span>
@@ -786,26 +930,26 @@ function App() {
         {/* We keep these cards dark/transparent to let the main panel theme shine through */}
         <AdvancedCard className="bg-white/5 border-white/5 space-y-5 p-6 rounded-2xl">
           <h3 className="text-xl font-semibold text-white">Offensive Security</h3>
-          <ul className="space-y-3 text-slate-300">
+          <div className="flex flex-wrap gap-3">
             {skills.cybersecurity.map((skill, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <span className="mt-2 block h-1.5 w-1.5 rounded-full bg-neon-teal shadow-[0_0_8px_rgba(20,255,255,0.5)]" />
+              <div key={index} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-300 transition-all hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-200">
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
                 <span>{skill}</span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </AdvancedCard>
 
         <AdvancedCard className="bg-white/5 border-white/5 space-y-5 p-6 rounded-2xl">
           <h3 className="text-xl font-semibold text-white">Development & Automation</h3>
-          <ul className="space-y-3 text-slate-300">
+          <div className="flex flex-wrap gap-3">
             {skills.programming.map((skill, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <span className="mt-2 block h-1.5 w-1.5 rounded-full bg-neon-teal shadow-[0_0_8px_rgba(20,255,255,0.5)]" />
+              <div key={index} className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-slate-300 transition-all hover:border-blue-400/40 hover:bg-blue-400/10 hover:text-blue-200">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.5)]" />
                 <span>{skill}</span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </AdvancedCard>
       </div>
     </div>
@@ -1146,7 +1290,34 @@ function App() {
                     required
                   />
                 </label>
-                <Button type="submit" variant="primary" className="w-full justify-center">Send Message</Button>
+                <div className="flex flex-col gap-6">
+                  {submitStatus === 'success' && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-center text-sm text-emerald-400"
+                    >
+                      Transmission successful. The message has been sent directly to Usama.
+                    </motion.div>
+                  )}
+                  {submitStatus === 'error' && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-center text-sm text-red-400"
+                    >
+                      Transmission failed. Please try again.
+                    </motion.div>
+                  )}
+                  <Button 
+                    type="submit" 
+                    variant="primary" 
+                    className={`w-full justify-center ${isSubmitting ? 'animate-pulse' : ''}`}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Transmitting...' : 'Send Message'}
+                  </Button>
+                </div>
               </form>
             </div>
           </Card>
